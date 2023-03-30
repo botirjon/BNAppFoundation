@@ -8,7 +8,12 @@
 import Foundation
 import UIKit
 
-public struct ImageTitleItem {
+public protocol AnyImageTitleItem {
+    var title: String? { get }
+    var image: UIImage? { get }
+}
+
+public struct ImageTitleItem: AnyImageTitleItem {
     public var title: String?
     public var image: UIImage?
     
@@ -17,3 +22,6 @@ public struct ImageTitleItem {
         self.image = image
     }
 }
+
+
+
