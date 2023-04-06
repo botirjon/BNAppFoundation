@@ -248,29 +248,33 @@ public extension String {
         return ""
     }
     
-    func internationalPhoneNumber(withMask mask: String? = nil) -> String {
-        guard let mask = mask else {
-            return self
-        }
-
-        let numbers = self.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+    func applying(mask: String) -> String {
         var result = ""
-        var index = numbers.startIndex // numbers iterator
+        var index = self.startIndex // numbers iterator
         
         // iterate over the mask characters until the iterator of numbers ends
-        for ch in mask where index < numbers.endIndex {
+        for ch in mask where index < self.endIndex {
             if ch == "X" {
                 // mask requires a number in this place, so take the next one
-                result.append(numbers[index])
+                result.append(self[index])
                 
                 // move numbers iterator to the next index
-                index = numbers.index(after: index)
+                index = self.index(after: index)
                 
             } else {
                 result.append(ch) // just append a mask character
             }
         }
         return result
+    }
+    
+    func internationalPhoneNumber(withMask mask: String? = nil) -> String {
+        guard let mask = mask else {
+            return self
+        }
+
+        let numbers = self.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+        return numbers.applying(mask: mask)
     }
 }
 
