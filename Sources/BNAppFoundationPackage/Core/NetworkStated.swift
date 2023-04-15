@@ -10,6 +10,7 @@ import Foundation
 public enum NetworkStated<T> {
     case ready(T)
     case loading
+    case searching
     case failed(_ reason: String)
     case none
 }
