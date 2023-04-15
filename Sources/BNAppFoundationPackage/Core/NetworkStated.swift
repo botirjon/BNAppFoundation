@@ -11,4 +11,5 @@ public enum NetworkStated<T> {
     case ready(T)
     case loading
     case failed(_ reason: String)
+    case none
 }
