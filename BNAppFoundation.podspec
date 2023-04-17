@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'BNAppFoundation'
-  s.version          = '1.4.0'
+  s.version          = '1.4.1'
   s.summary          = 'A cross app util methods.'
 
 # This description is used to generate tags and improve search results.
