@@ -111,7 +111,7 @@ public extension Double {
     ///   - currency: Currency of the money. By default empty.
     ///   - shouldDivideByHundred: If should divide by hundred. By default true.
     ///   - shouldKeepTiyins: If should keep tiyins. By default true.
-    func stringFormattedAsMoneyAmount(currency: String = "", shouldDivideByHundred: Bool = false, shouldKeepTiyins: Bool = true, decimalSeparator: DecimalSeparator = .point, shouldDropTrailingZeros: Bool = false) -> String? {
+    func stringFormattedAsMoneyAmount(currency: String = "", shouldDivideByHundred: Bool = false, shouldKeepTiyins: Bool = true, decimalSeparator: DecimalSeparator = .point, shouldDropTrailingZeros: Bool = false, shouldKeepOneTrailingZero: Bool = false) -> String? {
         
         var amount = shouldDivideByHundred ? self/100 : self
         if !shouldKeepTiyins {
@@ -138,7 +138,11 @@ public extension Double {
         if shouldKeepTiyins {
             if shouldDropTrailingZeros {
                 while splitted[1].last == "0" {
-                    splitted[1] = String(splitted[1].dropLast())
+                    if splitted[1].count == 1 && shouldKeepOneTrailingZero {
+                        break
+                    } else {
+                        splitted[1] = String(splitted[1].dropLast())
+                    }
                 }
                 if !splitted[1].isEmpty {
                     amountString = splitted.joined(separator: decimalSeparator.rawValue)
