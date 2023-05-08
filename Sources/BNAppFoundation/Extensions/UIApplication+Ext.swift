@@ -11,7 +11,7 @@ import UIKit
 
 public extension UIViewController {
     
-    var safeAreaInsets: UIEdgeInsets {
+    open var safeAreaInsets: UIEdgeInsets {
         let supMax = max(tabBarController?.tabBar.bounds.size.height ?? 0, navigationController?.tabBarController?.tabBar.bounds.size.height ?? 0)
         if #available(iOS 11.0, *) {
             let bottom = max(view.safeAreaInsets.bottom, supMax)
