@@ -23,6 +23,15 @@ public struct Stack<T> {
         return items.last
     }
     
+    
+    /// Inserts `item` in the stack at `index`.
+    /// - Parameters:
+    ///   - item: Item to insert.
+    ///   - index: Index at which to insert the item.
+    public mutating func insert(_ item: T, at index: Int) {
+        self.items.insert(item, at: index)
+    }
+    
     @discardableResult
     public mutating func pop() -> T? {
         guard !items.isEmpty else { return nil }
