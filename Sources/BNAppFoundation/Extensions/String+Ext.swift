@@ -316,3 +316,26 @@ public extension Optional where Wrapped == Array<Any> {
         }
     }
 }
+
+public extension String {
+    
+    func attributedString(adding attributes: [NSAttributedString.Key: Any], regexPattern: String) -> NSAttributedString {
+        
+        guard let regex = try? NSRegularExpression(pattern: regexPattern, options: []) else {
+            return NSAttributedString.init(string: self)
+        }
+        
+        let attributedString = NSMutableAttributedString(string: self)
+        
+        // Enumerate all matches of the regular expression in the input string
+        let matches = regex.matches(in: self, options: [], range: NSRange(location: 0, length: self.utf16.count))
+        for match in matches {
+            let matchRange = match.range
+            
+            // Apply red color to the matching substring
+            attributedString.addAttributes(attributes, range: matchRange)
+        }
+        
+        return attributedString
+    }
+}
